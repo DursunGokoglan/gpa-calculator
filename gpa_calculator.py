@@ -1,6 +1,6 @@
 class Calculator:
     def __init__(self):
-        self.dict = None
+        self.dict = {}
         self.lectures = []
         self.credits = []
         self.letter_grades = []
@@ -32,7 +32,13 @@ class Calculator:
             self.dict[self.lectures[index]].update({"credit": self.credits[index]})
             self.dict[self.lectures[index]].update({"letter_grade": self.letter_grades[index]})
 
+    def convert_letter_grades(self, letter_grade):
+        numgrade = 0
+        numgrade += self.letter_equivalents[letter_grade[0]]
+        numgrade += self.letter_equivalents[letter_grade[1]]
+        return numgrade
+
     def calculate(self):
         for lecture in self.lectures:
-            lecture_numgrade = self.letter_equivalents[self.dict[lecture]["letter_grade"][0]] + self.letter_equivalents[self.dict[lecture]["letter_grade"][1]]
+            lecture_numgrade = self.convert_letter_grades(self.dict[lecture]["letter_grade"])
             self.gpa += lecture_numgrade * self.dict[lecture]["credit"] / sum(self.credits)

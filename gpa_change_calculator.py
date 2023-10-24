@@ -4,7 +4,7 @@ from gpa_calculator import Calculator
 class ChangeCalculator(Calculator):
     def __init__(self):
         super().__init__()
-        self.dict = None
+        self.dict = {}
         self.lectures = []
         self.credits = []
         self.letter_grades1 = []
@@ -29,8 +29,7 @@ class ChangeCalculator(Calculator):
 
     def ask_total_credits(self):
         if len(self.lectures) != 0:
-            user_input = float(input("Enter total credits: "))
-            self.total_credits += user_input
+            self.total_credits += float(input("Enter total credits: "))
 
     def make_dict(self):
         self.dict = {lecture: {} for lecture in self.lectures}
@@ -41,7 +40,7 @@ class ChangeCalculator(Calculator):
 
     def calculate_difference(self):
         for lecture in self.lectures:
-            lecture_numgrade1 = self.letter_equivalents[self.dict[lecture]["letter_grade1"][0]] + self.letter_equivalents[self.dict[lecture]["letter_grade1"][1]]
-            lecture_numgrade2 = self.letter_equivalents[self.dict[lecture]["letter_grade2"][0]] + self.letter_equivalents[self.dict[lecture]["letter_grade2"][1]]
+            lecture_numgrade1 = self.convert_letter_grades(self.dict[lecture]["letter_grade1"])
+            lecture_numgrade2 = self.convert_letter_grades(self.dict[lecture]["letter_grade2"])
             self.gpa_change += (self.dict[lecture]["credit"] / self.total_credits) * (
                         lecture_numgrade2 - lecture_numgrade1)
