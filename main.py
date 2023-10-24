@@ -18,7 +18,14 @@ while is_on:
         print(f"gpa: {calculator.gpa.__round__(2)}")
 
     elif user_input == "c":
-        pass
+        change_calculator.get_lectures()
+        change_calculator.get_credits()
+        change_calculator.ask_total_credits()
+        change_calculator.get_letter_grades1()
+        change_calculator.get_letter_grades2()
+        change_calculator.make_dict()
+        change_calculator.calculate_difference()
+        print(f"gpa_change: {change_calculator.gpa_change.__round__(2)}")
 
     elif user_input == "off":
         print("turning off...")
